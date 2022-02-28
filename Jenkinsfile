@@ -18,8 +18,10 @@ pipeline {
     }
 
     stage ('Release') {
+        when {
+            tag "v0.0.2"
+        }
         steps {
-            sh 'git git tag -a v0.0.2 -m "First Release" && git push origin v0.0.2'
             sh 'curl -sL https://git.io/goreleaser | bash'
         }
     }
