@@ -19,7 +19,7 @@ pipeline {
 
     stage ('Release') {
         when {
-            tag "v0.0.*"
+            buildingTag()
         }
         steps {
             sh 'curl -sL https://git.io/goreleaser | bash'
