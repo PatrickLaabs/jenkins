@@ -10,6 +10,11 @@ pipeline {
     }
 
   stages {
+    stage('Preperation') {
+        steps {
+            sh 'rm -rf dist/'
+        }
+    }
     stage('Build') {
       steps {
         echo 'Building..'
@@ -20,6 +25,12 @@ pipeline {
     stage ('Release') {
         steps {
             sh 'curl -sL https://git.io/goreleaser | bash'
+        }
+    }
+
+    stage ('Clean Workspace') {
+        steps {
+            sh 'rm -rf dist/'
         }
     }
   }
