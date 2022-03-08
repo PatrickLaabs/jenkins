@@ -5,7 +5,7 @@ pipeline {
         CGO_ENABLED = 0
         GOPATH = "${JENKINS_HOME}/jobs/${JOB_NAME}/builds/${BUILD_ID}"
         PATH = "$PATH:$GOBIN"
-        WORKDIR = "${JENKINS_HOME}/bolt_exec_puppet"
+        WORKDIR = "bolt_exec_puppet"
     }
     tools {
         go 'go-1.17.7'
