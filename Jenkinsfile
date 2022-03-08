@@ -22,12 +22,6 @@ pipeline {
         sh 'go build'
       }
     }
-
-    stage ('Release') {
-        steps {
-        }
-    }
-
     stage ('Clean Workspace') {
         steps {
             sh 'rm -rf dist/'
