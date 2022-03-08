@@ -14,8 +14,9 @@ pipeline {
       stage('Preperation and Cleaning workdir') {
           steps {
               // Export environment variables pointing to the directory where Go was installed
-              withEnv(["GOBIN=${JENKINS_HOME}/org.jenkinsci.plugins.golang.GolangInstallation/go-1.17.7/bin"]) {
+              withEnv(["GOBIN=/usr/bin"]) {
                   sh 'go version'
+                  sh 'which go'
               }
               sh 'rm -rf $JENKINS_HOME/bolt_exec_puppet'
               sh 'rm -rf $JENKINS_HOME/bolt_exec_puppet/tools'
@@ -45,7 +46,7 @@ pipeline {
 
     stage('Goquette') {
         steps {
-            sh 'go install github.com/PatrickLaabs/goquette@latest'
+            sh 'GOBIN=/usr/bin go install github.com/PatrickLaabs/goquette@latest'
             echo 'running goquette inside dest dir'
             sh 'which goquette'
             sh 'echo $GOBIN'
