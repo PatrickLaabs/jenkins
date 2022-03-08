@@ -1,7 +1,7 @@
 pipeline {
   agent any
     environment {
-        GO114MODULE = 'on'
+        GO111MODULE = 'on'
         CGO_ENABLED = 0
         GOPATH = "${JENKINS_HOME}/jobs/${JOB_NAME}/builds/${BUILD_ID}"
     }
@@ -13,6 +13,7 @@ pipeline {
     stage('Preperation') {
         steps {
             sh 'rm -rf dist/'
+            sh 'GOBIN=/usr/local/bin/ go install github.com/PatrickLaabs/goquette@latest'
         }
     }
     stage('Build') {
@@ -24,7 +25,6 @@ pipeline {
 
     stage ('Release') {
         steps {
-            sh 'curl -sL https://git.io/goreleaser | bash'
         }
     }
 
