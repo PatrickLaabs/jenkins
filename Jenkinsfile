@@ -10,16 +10,11 @@ pipeline {
     }
 
   stages {
-    stage('Preperation') {
-        steps {
-            sh 'go install github.com/PatrickLaabs/goquette@latest'
-        }
-    }
     stage('Build') {
       steps {
         echo 'Building..'
         sh 'go build'
-        sh 'ls $JENKINS_HOME/jobs/{JOB_NAME}/builds/{BUILD_ID}'
+        sh 'ls $JENKINS_HOME/jobs/JOB_NAME/builds/BUILD_ID'
       }
     }
   }
