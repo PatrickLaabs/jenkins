@@ -10,8 +10,12 @@ pipeline {
     }
 
   stages {
-      stage('Preperation') {
+      stage('Preperation and Cleaning workdir') {
           steps {
+              // Export environment variables pointing to the directory where Go was installed
+              withEnv(["GOROOT=${root}", "PATH+GO=${root}/bin"]) {
+                  sh 'go version'
+              }
               sh 'rm -rf $JENKINS_HOME/bolt_exec_puppet'
               sh 'rm -rf $JENKINS_HOME/bolt_exec_puppet/tools'
           }
@@ -45,5 +49,11 @@ pipeline {
             sh 'cd $JENKINS_HOME/bolt_exec_puppet && $JENKINS_HOME/workspace/jenkins-test/goquette'
             }
         }
+
+    stage('DeployToNexus') {
+        steps {
+            echo 'deploying to nexus..'
+        }
+    }
   }
 }
