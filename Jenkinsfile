@@ -19,7 +19,7 @@ pipeline {
       steps {
         echo 'Building..'
         sh 'go build'
-        sh 'ls $JENKINS_HOME/jobs/jenkins-test/builds/'
+        sh 'ls $JENKINS_HOME/jobs/{JOB_NAME}/builds/{BUILD_ID}'
       }
     }
   }
