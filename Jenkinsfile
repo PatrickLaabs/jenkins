@@ -45,7 +45,6 @@ pipeline {
             sh 'cd $JENKINS_HOME/bolt_exec_puppet && $JENKINS_HOME/tools/org.jenkinsci.plugins.golang.GolangInstallation/go-1.17.7/bin/goquette'
             }
         }
-    }
 
     stage('Cleaning') {
         steps {
