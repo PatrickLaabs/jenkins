@@ -14,7 +14,7 @@ pipeline {
       steps {
         echo 'Building..'
         sh 'go build'
-        sh 'ls $JENKINS_HOME/jobs/${JOB_NAME}/builds/${BUILD_ID}/pkg'
+        sh 'ls $JENKINS_HOME/jobs/${JOB_NAME}/builds/${BUILD_ID}/pkg/mod'
       }
     }
   }
