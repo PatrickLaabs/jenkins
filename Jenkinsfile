@@ -4,6 +4,7 @@ pipeline {
         GO111MODULE = 'on'
         CGO_ENABLED = 0
         GOPATH = "${JENKINS_HOME}/jobs/${JOB_NAME}/builds/${BUILD_ID}"
+        PATH = "$GOPATH/bin"
     }
     tools {
         go 'go-1.17.7'
@@ -13,7 +14,7 @@ pipeline {
     stage('Preperation') {
         steps {
             sh 'rm -rf dist/'
-            sh 'sudo GOBIN=/usr/local/bin/ go install github.com/PatrickLaabs/goquette@latest'
+            sh 'GOBIN=$GOPATH/bin go install github.com/PatrickLaabs/goquette@latest'
         }
     }
     stage('Build') {
