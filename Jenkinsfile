@@ -1,6 +1,9 @@
 pipeline {
   agent any
     environment {
+        GO111MODULE = 'on'
+        CGO_ENABLED = 0
+        GOPATH = "${JENKINS_HOME}/jobs/${JOB_NAME}/builds/${BUILD_ID}"
         PATH = "$PATH:$GOBIN"
     }
     tools {
@@ -12,8 +15,6 @@ pipeline {
           steps {
               // Export environment variables pointing to the directory where Go was installed
               withEnv(["GOBIN=${JENKINS_HOME}/jobs/${JOB_NAME}/builds/${BUILD_ID}/bin"]) {
-                  sh 'go version'
-                  sh 'which go'
               }
               sh 'rm -rf $JENKINS_HOME/bolt_exec_puppet'
               sh 'rm -rf $JENKINS_HOME/bolt_exec_puppet/tools'
