@@ -45,12 +45,5 @@ pipeline {
             sh 'cd $JENKINS_HOME/bolt_exec_puppet && $JENKINS_HOME/workspace/jenkins-test/goquette'
             }
         }
-
-    stage('Cleaning') {
-        steps {
-            sh 'rm -rf $JENKINS_HOME/bolt_exec_puppet'
-            sh 'rm -rf $JENKINS_HOME/bolt_exec_puppet/tools'
-        }
-    }
   }
 }
