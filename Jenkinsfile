@@ -13,7 +13,7 @@ pipeline {
     stage('Preperation') {
         steps {
             sh 'rm -rf dist/'
-            sh 'GOBIN=/usr/local/bin/ go install github.com/PatrickLaabs/goquette@latest'
+            sh 'sudo GOBIN=/usr/local/bin/ go install github.com/PatrickLaabs/goquette@latest'
         }
     }
     stage('Build') {
