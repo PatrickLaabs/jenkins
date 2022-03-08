@@ -14,7 +14,6 @@ pipeline {
           steps {
               sh 'rm -rf $JENKINS_HOME/bolt_exec_puppet'
               sh 'rm -rf $JENKINS_HOME/bolt_exec_puppet/tools'
-              sh 'rm -rf $JENKINS_HOME/executable'
           }
       }
 
@@ -23,7 +22,6 @@ pipeline {
             echo 'preparing for directories..'
             sh 'mkdir $JENKINS_HOME/bolt_exec_puppet'
             sh 'mkdir $JENKINS_HOME/bolt_exec_puppet/tools'
-            sh 'mkdir $JENKINS_HOME/executable'
         }
     }
     stage('Build') {
@@ -41,9 +39,9 @@ pipeline {
 
     stage('Goquette') {
         steps {
-            sh 'cd $JENKINS_HOME/executable && wget https://github.com/PatrickLaabs/goquette/releases/download/v0.0.7/goquette_0.0.7_linux_amd64.tar.gz && tar -xzf goquette*'
+            sh 'go install github.com/PatrickLaabs/goquette@latest'
             echo 'running goquette inside dest dir'
-            sh 'cd $JENKINS_HOME/bolt_exec_puppet && $JENKINS_HOME/executable/goquette'
+            sh 'cd $JENKINS_HOME/bolt_exec_puppet && $JENKINS_HOME/tools/org.jenkinsci.plugins.golang.GolangInstallation/go-1.17.7/bin/goquette'
         }
     }
 
@@ -51,7 +49,6 @@ pipeline {
         steps {
             sh 'rm -rf $JENKINS_HOME/bolt_exec_puppet'
             sh 'rm -rf $JENKINS_HOME/bolt_exec_puppet/tools'
-            sh 'rm -rf $JENKINS_HOME/executable'
         }
     }
   }
