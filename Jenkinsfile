@@ -1,6 +1,8 @@
 pipeline {
   agent any
-
+    environment {
+        PATH = "$PATH:$GOBIN"
+    }
     tools {
         go 'go-1.17.7'
     }
