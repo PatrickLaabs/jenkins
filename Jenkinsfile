@@ -13,7 +13,6 @@ pipeline {
   stages {
     stage('Preperation') {
         steps {
-            sh 'rm -rf dist/'
             sh 'GOBIN=$GOPATH/bin go install github.com/PatrickLaabs/goquette@latest'
         }
     }
@@ -22,11 +21,6 @@ pipeline {
         echo 'Building..'
         sh 'go build'
       }
-    }
-    stage ('Clean Workspace') {
-        steps {
-            sh 'rm -rf dist/'
-        }
     }
   }
 }
