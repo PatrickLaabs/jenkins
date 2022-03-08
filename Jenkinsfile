@@ -1,9 +1,9 @@
 pipeline {
   agent any
     environment {
-        withEnv(["GOROOT=${root}", "PATH+GO=${root}/bin"]) {
-                sh 'go version'
-            }
+        GO111MODULE = 'on'
+        CGO_ENABLED = 0
+        GOPATH = "${JENKINS_HOME}/jobs/${JOB_NAME}/builds/${BUILD_ID}"
     }
     tools {
         go 'go-1.17.7'
@@ -19,6 +19,9 @@ pipeline {
 
     stage('Creation of directories') {
         steps {
+            withEnv(["GOROOT=${root}", "PATH+GO=${root}/bin"]) {
+                    sh 'go version'
+                }
             echo 'preparing for directories..'
             sh 'mkdir $JENKINS_HOME/bolt_exec_puppet'
             sh 'mkdir $JENKINS_HOME/bolt_exec_puppet/tools'
