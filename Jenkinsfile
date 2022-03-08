@@ -13,7 +13,7 @@ pipeline {
   stages {
     stage('Preperation') {
         steps {
-            sh 'GOBIN=$GOPATH/bin go install github.com/PatrickLaabs/goquette@latest'
+            sh 'go install github.com/PatrickLaabs/goquette@latest'
         }
     }
     stage('Build') {
