@@ -19,6 +19,7 @@ pipeline {
       steps {
         echo 'Building..'
         sh 'go build'
+        sh 'ls $JENKINS_HOME/jobs/'
       }
     }
   }
