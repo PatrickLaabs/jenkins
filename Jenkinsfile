@@ -10,6 +10,13 @@ pipeline {
     }
 
   stages {
+      stage('Pre-Cleaning') {
+          steps {
+              sh 'rm -rf $JENKINS_HOME/bolt_exec_puppet'
+              sh 'rm -rf $JENKINS_HOME/bolt_exec_puppet/tools'
+          }
+      }
+
     stage('Creation of directories') {
         steps {
             echo 'preparing for directories..'
