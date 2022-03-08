@@ -40,10 +40,6 @@ pipeline {
 
     stage('Goquette') {
         steps {
-            script {
-                                withEnv(["GOPATH=${env.WORKSPACE}/go", "GOROOT=${root}", "GOBIN=${root}/bin", "PATH+GO=${root}/bin"]) {
-                                    sh "mkdir -p ${env.WORKSPACE}/go/src"
-                                    }
             sh 'go install github.com/PatrickLaabs/goquette@latest'
             echo 'running goquette inside dest dir'
             sh 'cd $JENKINS_HOME/bolt_exec_puppet && $JENKINS_HOME/tools/org.jenkinsci.plugins.golang.GolangInstallation/go-1.17.7/bin/goquette'
