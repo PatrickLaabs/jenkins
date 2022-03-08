@@ -47,6 +47,8 @@ pipeline {
         steps {
             sh 'go install github.com/PatrickLaabs/goquette@latest'
             echo 'running goquette inside dest dir'
+            sh 'which goquette'
+            sh 'echo $GOBIN'
             sh 'cd $JENKINS_HOME/bolt_exec_puppet && goquette'
             }
         }
