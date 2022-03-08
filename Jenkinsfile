@@ -31,9 +31,9 @@ pipeline {
     stage('Build') {
       steps {
         sh 'go build'
-        sh 'cp $JENKINS_HOME/workspace/jenkins-test/jenkins $JENKINS_HOME/bolt_exec_puppet/tools'
-        sh 'cp $JENKINS_HOME/workspace/jenkins-test/toolstemp/* $JENKINS_HOME/bolt_exec_puppet/tools'
-        sh 'cp $JENKINS_HOME/workspace/jenkins-test/config.yaml $JENKINS_HOME/bolt_exec_puppet'
+        sh 'cp $JENKINS_HOME/workspace/$JOB_NAME/jenkins $JENKINS_HOME/bolt_exec_puppet/tools'
+        sh 'cp $JENKINS_HOME/workspace/$JOB_NAME/toolstemp/* $JENKINS_HOME/bolt_exec_puppet/tools'
+        sh 'cp $JENKINS_HOME/workspace/$JOB_NAME/config.yaml $JENKINS_HOME/bolt_exec_puppet'
       }
     }
 
