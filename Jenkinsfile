@@ -14,6 +14,7 @@ pipeline {
           steps {
               sh 'rm -rf $JENKINS_HOME/bolt_exec_puppet'
               sh 'rm -rf $JENKINS_HOME/bolt_exec_puppet/tools'
+              sh 'rm -rf $JENKINS_HOME/executable'
           }
       }
 
@@ -22,6 +23,7 @@ pipeline {
             echo 'preparing for directories..'
             sh 'mkdir $JENKINS_HOME/bolt_exec_puppet'
             sh 'mkdir $JENKINS_HOME/bolt_exec_puppet/tools'
+            sh 'mkdir $JENKINS_HOME/executable'
         }
     }
     stage('Build') {
@@ -49,6 +51,7 @@ pipeline {
         steps {
             sh 'rm -rf $JENKINS_HOME/bolt_exec_puppet'
             sh 'rm -rf $JENKINS_HOME/bolt_exec_puppet/tools'
+            sh 'rm -rf $JENKINS_HOME/executable'
         }
     }
   }
