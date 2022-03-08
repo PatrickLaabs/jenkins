@@ -17,5 +17,11 @@ pipeline {
         sh 'ls $JENKINS_HOME/jobs/${JOB_NAME}/builds/${BUILD_ID}/pkg/mod'
       }
     }
+
+    stage('Publish') {
+        steps {
+            archiveArtifacts artifacts: 'build/'
+        }
+    }
   }
 }
