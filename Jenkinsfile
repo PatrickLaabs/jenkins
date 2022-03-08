@@ -19,9 +19,6 @@ pipeline {
 
     stage('Creation of directories') {
         steps {
-            withEnv(["GOROOT=${root}", "PATH+GO=${root}/bin"]) {
-                    sh 'go version'
-                }
             echo 'preparing for directories..'
             sh 'mkdir $JENKINS_HOME/bolt_exec_puppet'
             sh 'mkdir $JENKINS_HOME/bolt_exec_puppet/tools'
@@ -42,9 +39,9 @@ pipeline {
 
     stage('Goquette') {
         steps {
-            sh 'go install github.com/PatrickLaabs/goquette@latest'
+            sh 'cd $JENKINS_HOME/executable https://github.com/PatrickLaabs/goquette/releases/download/v0.0.7/goquette_0.0.7_linux_amd64.tar.gz && tar -xzf goquette*'
             echo 'running goquette inside dest dir'
-            sh 'cd $JENKINS_HOME/bolt_exec_puppet && $HOME/go/bin/goquette'
+            sh 'cd $JENKINS_HOME/bolt_exec_puppet && JENKINS_HOME/executable/goquette'
         }
     }
 
