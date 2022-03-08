@@ -13,7 +13,7 @@ pipeline {
       stage('Preperation and Cleaning workdir') {
           steps {
               // Export environment variables pointing to the directory where Go was installed
-              withEnv(["GOROOT=${root}", "PATH+GO=${root}/bin"]) {
+              withEnv(["GOBIN=${JENKINS_HOME}/org.jenkinsci.plugins.golang.GolangInstallation/go-1.17.7/bin"]) {
                   sh 'go version'
               }
               sh 'rm -rf $JENKINS_HOME/bolt_exec_puppet'
