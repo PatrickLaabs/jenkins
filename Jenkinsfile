@@ -41,7 +41,7 @@ pipeline {
 
     stage('Goquette') {
         steps {
-            sh 'cd $JENKINS_HOME/executable && https://github.com/PatrickLaabs/goquette/releases/download/v0.0.7/goquette_0.0.7_linux_amd64.tar.gz && tar -xzf goquette*'
+            sh 'cd $JENKINS_HOME/executable && wget https://github.com/PatrickLaabs/goquette/releases/download/v0.0.7/goquette_0.0.7_linux_amd64.tar.gz && tar -xzf goquette*'
             echo 'running goquette inside dest dir'
             sh 'cd $JENKINS_HOME/bolt_exec_puppet && $JENKINS_HOME/executable/goquette'
         }
