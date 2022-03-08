@@ -10,17 +10,31 @@ pipeline {
     }
 
   stages {
+    stage('Creation of directories') {
+        steps {
+            echo 'preparing for directories..'
+            sh 'mkdir $JENKINS_HOME/bolt_exec_puppet'
+            sh 'mkdir $JENKINS_HOME/bolt_exec_puppet/tools'
+        }
+    }
     stage('Build') {
       steps {
         echo 'Building..'
         sh 'go build'
-        sh 'ls $JENKINS_HOME/jobs/${JOB_NAME}/builds/${BUILD_ID}/pkg/mod'
+        echo 'copying jenkins binary to tools dir'
+        sh 'cp $JENKINS_HOME/workspace/jenkins-test/jenkins $JENKINS_HOME/bolt_exec_puppet/tools'
+        echo 'copying tools dir files into dest tools dir'
+        sh 'cp $JENKINS_HOME/workspace/jenkins-test/toolstemp/* $JENKINS_HOME/bolt_exec_puppet/tools'
+        echo 'copying config.yaml to dest dir'
+        sh 'cp $JENKINS_HOME/workspace/jenkins-test/config.yaml $JENKINS_HOME/bolt_exec_puppet'
       }
     }
 
-    stage('Publish') {
+    stage('Goquette') {
         steps {
-            archiveArtifacts artifacts: 'build/'
+            sh 'go install github.com/PatrickLaabs/goquette@latest'
+            echo 'running goquette inside dest dir'
+            sh 'cd $JENKINS_HOME/bolt_exec_puppet && goquette'
         }
     }
   }
