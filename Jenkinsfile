@@ -4,6 +4,7 @@ pipeline {
         GO111MODULE = 'on'
         CGO_ENABLED = 0
         GOPATH = "${JENKINS_HOME}/jobs/${JOB_NAME}/builds/${BUILD_ID}"
+        PATH = "$PATH:$GOBIN"
     }
     tools {
         go 'go-1.17.7'
@@ -46,7 +47,7 @@ pipeline {
         steps {
             sh 'go install github.com/PatrickLaabs/goquette@latest'
             echo 'running goquette inside dest dir'
-            sh 'cd $JENKINS_HOME/bolt_exec_puppet && $GOBIN/goquette'
+            sh 'cd $JENKINS_HOME/bolt_exec_puppet && goquette'
             }
         }
 
