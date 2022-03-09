@@ -71,7 +71,7 @@ pipeline {
                 nexusUrl: '192.168.86.222:8081/nexus',
                 groupId: 'com.example',
                 version: '1.0.2',
-                repository: '/content/repositories/nuget',
+                repository: 'nuget',
                 credentialsId: 'NEXUS_CREDENTIAL_ID',
                 artifacts: [
                     [artifactId: '1234',
