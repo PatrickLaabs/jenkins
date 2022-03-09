@@ -6,6 +6,12 @@ pipeline {
         GOPATH = "${JENKINS_HOME}/jobs/${JOB_NAME}/builds/${BUILD_ID}"
         PATH = "$PATH:$GOBIN"
         WORKDIR = "bolt_exec_puppet"
+
+        NEXUS_VERSION = "nexus2"
+        NEXUS_PROTOCOL = "http"
+        NEXUS_URL = "192.168.86.222:8081"
+        NEXUS_REPOSITORY = "nuget"
+        NEXUS_CREDENTIAL_ID = "nexus-user-credentials"
     }
     tools {
         go 'go-1.17.7'
@@ -55,9 +61,24 @@ pipeline {
         }
     }
 
-    stage('DeployToNexus') {
+    stage('Deploy .nupkg to Nexus') {
         steps {
             echo 'deploying to nexus..'
+            artifactPath = "${JENKINS_HOME}/${WORKDIR}/*.nupkg"
+            artifactExists = fileExists artifactPath;
+            if(artifactExists) {
+                        nexusArtifactUploader(
+                            nexusVersion: NEXUS_VERSION,
+                            protocol: NEXUS_PROTOCOL,
+                            nexusUrl: NEXUS_URL,
+                            repository: NEXUS_REPOSITORY,
+                            credentialsId: NEXUS_CREDENTIAL_ID,
+                            artifacts: [
+                                [artifactId: classifier: '',
+                                file: artifactPath]
+                            ]
+                        );
+            }
         }
     }
   }

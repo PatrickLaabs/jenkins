@@ -5,6 +5,7 @@ pipeline {
         CGO_ENABLED = 0
         GOPATH = "${JENKINS_HOME}/jobs/${JOB_NAME}/builds/${BUILD_ID}"
         PATH = "$PATH:$GOBIN"
+        WORKDIR = "bolt_exec_puppet"
     }
     tools {
         go 'go-1.17.7'
@@ -13,38 +14,46 @@ pipeline {
   stages {
       stage('Preperation and Cleaning workdir') {
           steps {
-              // Export environment variables pointing to the directory where Go was installed
               withEnv(["GOBIN=${JENKINS_HOME}/jobs/${JOB_NAME}/builds/${BUILD_ID}/bin"]) {
-                  sh 'go version'
-                  sh 'which go'
               }
-              sh 'rm -rf $JENKINS_HOME/bolt_exec_puppet'
-              sh 'rm -rf $JENKINS_HOME/bolt_exec_puppet/tools'
+              sh 'rm -rf $JENKINS_HOME/$WORKDIR'
+              sh 'rm -rf $JENKINS_HOME/$WORKDIR/tools'
           }
       }
 
     stage('Creation of directories') {
         steps {
-            sh 'mkdir $JENKINS_HOME/bolt_exec_puppet'
-            sh 'mkdir $JENKINS_HOME/bolt_exec_puppet/tools'
+            sh 'mkdir $JENKINS_HOME/$WORKDIR'
+            sh 'mkdir $JENKINS_HOME/$WORKDIR/tools'
         }
     }
 
     stage('Build') {
       steps {
-        sh 'go build'
-        sh 'cp $JENKINS_HOME/workspace/jenkins-test/jenkins $JENKINS_HOME/bolt_exec_puppet/tools'
-        sh 'cp $JENKINS_HOME/workspace/jenkins-test/toolstemp/* $JENKINS_HOME/bolt_exec_puppet/tools'
-        sh 'cp $JENKINS_HOME/workspace/jenkins-test/config.yaml $JENKINS_HOME/bolt_exec_puppet'
+        sh 'GOOS=linux go build'
+        sh 'GOOS=windows go build'
+        sh 'tar cf bolt_exec_puppet.zip *.exe'
+        sh 'cp $JENKINS_HOME/workspace/$JOB_NAME/*.zip $JENKINS_HOME/$WORKDIR/tools'
+        sh 'cp $JENKINS_HOME/workspace/$JOB_NAME/toolstemp/* $JENKINS_HOME/$WORKDIR/tools'
+        sh 'cp $JENKINS_HOME/workspace/$JOB_NAME/config.yaml $JENKINS_HOME/$WORKDIR'
       }
     }
 
-    stage('Goquette') {
+    stage('Goquette - NuGet Packaging') {
         steps {
             sh 'go install github.com/PatrickLaabs/goquette@latest'
-            sh 'cd $JENKINS_HOME/bolt_exec_puppet && $JENKINS_HOME/jobs/$JOB_NAME/builds/$BUILD_ID/bin/goquette'
+            sh 'cd $JENKINS_HOME/$WORKDIR && $JENKINS_HOME/jobs/$JOB_NAME/builds/$BUILD_ID/bin/goquette'
             }
         }
+
+    stage('nFPM - rpm Packaging') {
+        steps {
+            sh 'go install github.com/goreleaser/nfpm/v2/cmd/nfpm@latest'
+            sh 'cp $JENKINS_HOME/workspace/$JOB_NAME/nfpm.yaml $JENKINS_HOME/$WORKDIR'
+            sh 'cp $JENKINS_HOME/workspace/$JOB_NAME/jenkins $JENKINS_HOME/$WORKDIR'
+            sh 'cd $JENKINS_HOME/$WORKDIR && $JENKINS_HOME/jobs/$JOB_NAME/builds/$BUILD_ID/bin/nfpm pkg --packager rpm --target $PWD'
+        }
+    }
 
     stage('DeployToNexus') {
         steps {
