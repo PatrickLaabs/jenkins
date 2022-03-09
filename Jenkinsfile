@@ -74,8 +74,7 @@ pipeline {
                             repository: NEXUS_REPOSITORY,
                             credentialsId: NEXUS_CREDENTIAL_ID,
                             artifacts: [
-                                [artifactId: classifier: '',
-                                file: artifactPath]
+                                [file: artifactPath]
                             ]
                         );
             }
