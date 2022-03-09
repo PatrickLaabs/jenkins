@@ -49,7 +49,7 @@ pipeline {
     stage('nFPM - rpm Packaging') {
         steps {
             sh 'go install github.com/goreleaser/nfpm/v2/cmd/nfpm@latest'
-            sh 'nfpm pkg --packager rpm --target $PWD'
+            sh '$JENKINS_HOME/jobs/$JOB_NAME/builds/$BUILD_ID/bin/nfpm pkg --packager rpm --target $PWD'
             sh 'cp *.rpm $JENKINS_HOME/$WORKDIR'
         }
     }
