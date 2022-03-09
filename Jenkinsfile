@@ -12,6 +12,7 @@ pipeline {
         NEXUS_URL = "192.168.86.222:8081"
         NEXUS_REPOSITORY = "nuget"
         NEXUS_CREDENTIAL_ID = "nexus-user-credentials"
+        NEXUS_PROJECTNAME = "bolt_exec_puppet"
     }
     tools {
         go 'go-1.17.7'
@@ -65,16 +66,16 @@ pipeline {
         steps {
             echo 'deploying to nexus..'
             nexusArtifactUploader(
-                nexusVersion: 'nexus2',
-                protocol: 'http',
-                nexusUrl: '192.168.86.222:8081',
+                nexusVersion: 'NEXUS_VERSION',
+                protocol: 'NEXUS_PROTOCOL',
+                nexusUrl: 'NEXUS_URL',
                 groupId: 'com.example',
-                version: "v1.0.2",
-                repository: 'nuget',
+                version: '1.0.2',
+                repository: 'NEXUS_REPOSITORY',
                 credentialsId: 'NEXUS_CREDENTIAL_ID',
                 artifacts: [
-                    [artifactId: "test",
-                     classifier: 'debug',
+                    [artifactId: 'NEXUS_PROJECTNAME',
+                     classifier: '',
                      file: '/var/jenkins_home/bolt_exec_puppet/bolt_exec_puppet.nupkg',
                      type: 'nuget']
                 ]
