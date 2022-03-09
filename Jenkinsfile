@@ -10,7 +10,7 @@ pipeline {
         NEXUS_VERSION = "nexus2"
         NEXUS_PROTOCOL = "http"
         NEXUS_URL = "192.168.86.222:8081"
-        NEXUS_REPOSITORY = "nuget"
+        NEXUS_REPOSITORY = "/nexus/content/repositories/nuget"
         NEXUS_CREDENTIAL_ID = "nexus-user-credentials"
         NEXUS_PROJECTNAME = "bolt_exec_puppet"
     }
