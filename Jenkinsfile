@@ -12,6 +12,10 @@ pipeline {
     }
 
   stages {
+    stage('Cleaning workspace'){
+        sh 'rm -rf $JENKINS_HOME/workspace/$JOB_NAME/content'
+    }
+
     stage('Build') {
       steps {
         sh 'GOOS=linux go build'
