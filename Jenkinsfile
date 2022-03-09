@@ -94,9 +94,9 @@ pipeline {
                 repository: 'rpm',
                 credentialsId: 'nexus-user-credentials',
                 artifacts: [
-                    [artifactId: 'bolt_exec_puppet',
+                    [artifactId: 'jenkins',
                      classifier: 'release',
-                     file: '/var/jenkins_home/bolt_exec_puppet/bolt_exec_puppet.rpm',
+                     file: '/var/jenkins_home/bolt_exec_puppet/*.rpm',
                      type: 'rpm']
                 ]
              )
