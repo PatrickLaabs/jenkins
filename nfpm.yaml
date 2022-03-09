@@ -19,5 +19,5 @@ vendor: "Eitco"
 homepage: "https://github.com/PatrickLaabs/bolt_exec_puppet"
 license: "MIT"
 contents:
-  - src: $PWD/*.rpm
+  - src: $PWD
     dst: /usr/local/bin/bolt_exec_puppet
