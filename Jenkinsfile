@@ -96,7 +96,7 @@ pipeline {
                 artifacts: [
                     [artifactId: 'jenkins',
                      classifier: 'release',
-                     file: '/var/jenkins_home/bolt_exec_puppet/*.rpm',
+                     file: '/var/jenkins_home/bolt_exec_puppet/jenkins-1.0.2.x86_64.rpm',
                      type: 'rpm']
                 ]
              )
