@@ -65,21 +65,21 @@ pipeline {
     stage('Deploy .nupkg to Nexus') {
         steps {
             echo 'deploying to nexus..'
-            nexusArtifactUploader {
-                nexusVersion: 'NEXUS_VERSION',
-                protocol: 'NEXUS_PROTOCOL',
+            nexusArtifactUploader(
+                nexusVersion: 'nexus2',
+                protocol: 'http',
                 nexusUrl: '192.168.86.222:8081/nexus',
                 groupId: 'com.example',
                 version: '1.0.2',
                 repository: 'nuget',
-                credentialsId: 'NEXUS_CREDENTIAL_ID',
+                credentialsId: 'nexus-user-credentials',
                 artifacts: [
                     [artifactId: 'nexus-artifact-uploader',
                      classifier: 'debug',
                      file: '/var/jenkins_home/bolt_exec_puppet/bolt_exec_puppet.nupkg',
                      type: 'nuget']
                 ]
-             }
+             )
         }
     }
   }
