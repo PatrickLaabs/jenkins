@@ -68,10 +68,10 @@ pipeline {
             nexusArtifactUploader(
                 nexusVersion: 'NEXUS_VERSION',
                 protocol: 'NEXUS_PROTOCOL',
-                nexusUrl: 'NEXUS_URL',
+                nexusUrl: '192.168.86.222:8081/nexus',
                 groupId: 'com.example',
                 version: '1.0.2',
-                repository: 'NEXUS_REPOSITORY',
+                repository: '/content/repositories/nuget',
                 credentialsId: 'NEXUS_CREDENTIAL_ID',
                 artifacts: [
                     [artifactId: 'NEXUS_PROJECTNAME',
