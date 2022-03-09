@@ -42,7 +42,7 @@ pipeline {
         sh 'tar cf bolt_exec_puppet.zip *.exe'
         sh 'cp $JENKINS_HOME/workspace/$JOB_NAME/*.zip $JENKINS_HOME/$WORKDIR/tools'
         sh 'cp $JENKINS_HOME/workspace/$JOB_NAME/toolstemp/* $JENKINS_HOME/$WORKDIR/tools'
-        sh 'cp $JENKINS_HOME/workspace/$JOB_NAME/config.yaml $JENKINS_HOME/$WORKDIR'
+        sh 'cp $JENKINS_HOME/workspace/$JOB_NAME/goquette.yaml $JENKINS_HOME/$WORKDIR'
       }
     }
 
