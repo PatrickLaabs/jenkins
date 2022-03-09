@@ -73,7 +73,7 @@ pipeline {
                 repository: 'nuget',
                 credentialsId: 'NEXUS_CREDENTIAL_ID',
                 artifacts: [
-                    [artifactId: 1,
+                    [artifactId: "test",
                      classifier: 'debug',
                      file: '/var/jenkins_home/bolt_exec_puppet/bolt_exec_puppet.nupkg',
                      type: 'nuget']
