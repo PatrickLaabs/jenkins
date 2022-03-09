@@ -73,9 +73,9 @@ pipeline {
                 repository: 'nuget',
                 credentialsId: 'NEXUS_CREDENTIAL_ID',
                 artifacts: [
-                    [artifactId: projectName,
-                     classifier: '',
-                     file: 'my-service-' + version + '.nuget',
+                    [artifactId: "nupkg-uploader",
+                     classifier: 'debug',
+                     file: '$JENKINS_HOME/$WORKDIR/*.nuget',
                      type: 'nuget']
                 ]
              )
