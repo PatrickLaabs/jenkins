@@ -82,5 +82,25 @@ pipeline {
              )
         }
     }
+
+    stage('Deploy .rpm to Nexus') {
+        steps {
+            nexusArtifactUploader(
+                nexusVersion: 'nexus2',
+                protocol: 'http',
+                nexusUrl: '192.168.86.222:8081/nexus',
+                groupId: 'com.example',
+                version: '1.0.2',
+                repository: 'rpm',
+                credentialsId: 'nexus-user-credentials',
+                artifacts: [
+                    [artifactId: 'bolt_exec_puppet',
+                     classifier: 'release',
+                     file: '/var/jenkins_home/bolt_exec_puppet/bolt_exec_puppet.rpm',
+                     type: 'rpm']
+                ]
+             )
+        }
+    }
   }
 }
