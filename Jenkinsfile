@@ -64,6 +64,21 @@ pipeline {
     stage('Deploy .nupkg to Nexus') {
         steps {
             echo 'deploying to nexus..'
+            nexusArtifactUploader(
+                nexusVersion: 'nexus2',
+                protocol: 'http',
+                nexusUrl: '192.168.86.222:8081',
+                groupId: 'com.example',
+                version: version,
+                repository: 'nuget',
+                credentialsId: 'NEXUS_CREDENTIAL_ID',
+                artifacts: [
+                    [artifactId: projectName,
+                     classifier: '',
+                     file: 'my-service-' + version + '.nuget',
+                     type: 'nuget']
+                ]
+             )
         }
     }
   }
