@@ -19,5 +19,5 @@ vendor: "Eitco"
 homepage: "https://github.com/PatrickLaabs/jenkins"
 license: "MIT"
 contents:
-  - src: $PWD/jenkins
+  - src: /var/jenkins_home/bolt_exec_puppet/jenkins
     dst: /usr/local/bin/jenkins
