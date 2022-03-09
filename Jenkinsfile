@@ -75,7 +75,7 @@ pipeline {
                 artifacts: [
                     [artifactId: 1,
                      classifier: 'debug',
-                     file: '$JENKINS_HOME/$WORKDIR/*.nuget',
+                     file: '/var/jenkins_home/bolt_exec_puppet/bolt_exec_puppet.nupkg',
                      type: 'nuget']
                 ]
              )
