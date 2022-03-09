@@ -69,7 +69,7 @@ pipeline {
                 protocol: 'http',
                 nexusUrl: '192.168.86.222:8081',
                 groupId: 'com.example',
-                version: version,
+                version: "v1.0.2",
                 repository: 'nuget',
                 credentialsId: 'NEXUS_CREDENTIAL_ID',
                 artifacts: [
