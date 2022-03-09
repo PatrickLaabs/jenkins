@@ -23,7 +23,7 @@ pipeline {
     stage('Goquette - NuGet Packaging') {
         steps {
             sh 'go install github.com/PatrickLaabs/goquette@latest'
-            sh '$JENKINS_HOME/jobs/$JOB_NAME/builds/$BUILD_ID/bin/goquette'
+            sh 'cd $JENKINS_HOME/workspace/$JOB_NAME && $JENKINS_HOME/jobs/$JOB_NAME/builds/$BUILD_ID/bin/goquette'
             }
         }
 
