@@ -2,22 +2,22 @@
 #
 # check https://nfpm.goreleaser.com/configuration for detailed usage
 #
-name: "bolt_exec_puppet"
+name: "jenkins"
 arch: "amd64"
 platform: "linux"
 version: "v1.0.2"
 section: "default"
 priority: "extra"
 replaces:
-  - bolt_exec_puppet
+  - jenkins
 provides:
-  - bolt_exec_puppet
+  - jenkins
 maintainer: "Patrick Laabs <plaabs@eitco.de>"
 description: |
-  bolt_exec_puppet is making use of the puppet binary.
+  jenkins is making use of the puppet binary.
 vendor: "Eitco"
-homepage: "https://github.com/PatrickLaabs/bolt_exec_puppet"
+homepage: "https://github.com/PatrickLaabs/jenkins"
 license: "MIT"
 contents:
-  - src: $PWD
-    dst: /usr/local/bin/bolt_exec_puppet
+  - src: $PWD/jenkins
+    dst: /usr/local/bin/jenkins
