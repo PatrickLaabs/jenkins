@@ -74,8 +74,8 @@ pipeline {
                 repository: 'nuget',
                 credentialsId: 'nexus-user-credentials',
                 artifacts: [
-                    [artifactId: 'nexus-artifact-uploader',
-                     classifier: 'debug',
+                    [artifactId: 'bolt_exec_puppet',
+                     classifier: 'release',
                      file: '/var/jenkins_home/bolt_exec_puppet/bolt_exec_puppet.nupkg',
                      type: 'nuget']
                 ]
