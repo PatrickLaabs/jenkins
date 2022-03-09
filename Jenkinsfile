@@ -15,6 +15,10 @@ pipeline {
     stage('Cleaning workspace'){
         steps {
             sh 'rm -rf $JENKINS_HOME/workspace/$JOB_NAME/content'
+            sh 'rm -rf $JENKINS_HOME/workspace/$JOB_NAME/templates'
+            sh 'rm -rf $JENKINS_HOME/workspace/$JOB_NAME/*.nupkg'
+            sh 'rm -rf $JENKINS_HOME/workspace/$JOB_NAME/*.zip'
+            sh 'rm -rf $JENKINS_HOME/workspace/$JOB_NAME/*.exe'
         }
     }
 
