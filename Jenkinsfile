@@ -64,6 +64,7 @@ pipeline {
     stage('Deploy .nupkg to Nexus') {
         steps {
             echo 'deploying to nexus..'
+            steps {
             artifactPath = "${JENKINS_HOME}/${WORKDIR}/*.nupkg"
             artifactExists = fileExists artifactPath;
             if(artifactExists) {
@@ -77,6 +78,7 @@ pipeline {
                                 [file: artifactPath]
                             ]
                         );
+            }
             }
         }
     }
