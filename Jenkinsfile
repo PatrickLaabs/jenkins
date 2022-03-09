@@ -64,17 +64,6 @@ pipeline {
     stage('Deploy .nupkg to Nexus') {
         steps {
             echo 'deploying to nexus..'
-            artifactPath = "${JENKINS_HOME}/${WORKDIR}/*.nupkg"
-                                    nexusArtifactUploader(
-                                        nexusVersion: NEXUS_VERSION,
-                                        protocol: NEXUS_PROTOCOL,
-                                        nexusUrl: NEXUS_URL,
-                                        repository: NEXUS_REPOSITORY,
-                                        credentialsId: NEXUS_CREDENTIAL_ID,
-                                        artifacts: [
-                                            [file: artifactPath]
-                                        ]
-                                    );
         }
     }
   }
