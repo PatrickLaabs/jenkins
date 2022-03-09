@@ -19,5 +19,5 @@ vendor: "Eitco"
 homepage: "https://github.com/PatrickLaabs/jenkins"
 license: "MIT"
 contents:
-  - src: ${JENKINS_HOME}/workspace/${JOB_NAME}/jenkins
+  - src: /var/jenkins_home/workspace/jenkins-test/jenkins
     dst: /usr/local/bin/jenkins
