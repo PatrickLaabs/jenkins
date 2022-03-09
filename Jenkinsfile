@@ -41,11 +41,13 @@ pipeline {
                 nexusVersion: 'nexus2',
                 protocol: 'http',
                 nexusUrl: '192.168.86.222:8081/nexus',
+                groupId: 'com.example',
                 version: '1.0.2',
                 repository: 'nuget',
                 credentialsId: 'nexus-user-credentials',
                 artifacts: [
                     [artifactId: 'jenkins',
+                    classifier: 'release',
                      file: '$JENKINS_HOME/workspace/$JOB_NAME/jenkins.nupkg',
                      type: 'nuget']
                 ]
@@ -59,11 +61,13 @@ pipeline {
                 nexusVersion: 'nexus2',
                 protocol: 'http',
                 nexusUrl: '192.168.86.222:8081/nexus',
+                groupId: 'com.example',
                 version: '1.0.2',
                 repository: 'rpm',
                 credentialsId: 'nexus-user-credentials',
                 artifacts: [
                     [artifactId: 'jenkins',
+                     classifier: 'release',
                      file: '$JENKINS_HOME/workspace/$JOB_NAME/jenkins-1.0.2.x86_64.rpm',
                      type: 'rpm']
                 ]
