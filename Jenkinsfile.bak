@@ -24,7 +24,7 @@ pipeline {
 
     stage('Build') {
       steps {
-        sh 'GOOS=linux go build'git
+        sh 'GOOS=linux go build'
         sh 'GOOS=windows go build'
         sh 'tar cf $JENKINS_HOME/workspace/$JOB_NAME/tools/jenkins.zip *.exe'
       }
