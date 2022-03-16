@@ -1,31 +1,11 @@
 pipeline {
     agent {
-        docker {
-            image 'node:carbon'
-            args '-u 0:0'
-        }
+        docker { image 'node:16.13.1-alpine' }
     }
     stages {
-        stage('Install') {
-            steps {
-                sh 'npm install'
-                sh 'npm run bootstrap'
-                sh 'npm run lint'
-            }
-        }
-        stage('Build') {
-            steps {
-                sh 'npm run build'
-            }
-        }
         stage('Test') {
             steps {
-                sh 'npm test'
-            }
-            post {
-                always {
-                    junit 'junit.xml'
-                }
+                sh 'node --version'
             }
         }
     }
