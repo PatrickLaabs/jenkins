@@ -1,22 +1,32 @@
 pipeline {
-  node {
-      stage "Prepare environment"
-          checkout scm
-          def environment  = docker.build 'cloudbees-node'
-
-          environment.inside {
-              stage "Checkout and build deps"
-                  sh "npm install"
-
-              stage "Validate types"
-                  sh "./node_modules/.bin/flow"
-
-              stage "Test and validate"
-                  sh "npm install gulp-cli && ./node_modules/.bin/gulp"
-                  junit 'reports/**/*.xml'
-          }
-
-      stage "Cleanup"
-          deleteDir()
-  }
+    agent {
+        docker {
+            image 'node:carbon'
+            args '-u 0:0'
+        }
+    }
+    stages {
+        stage('Install') {
+            steps {
+                sh 'npm install'
+                sh 'npm run bootstrap'
+                sh 'npm run lint'
+            }
+        }
+        stage('Build') {
+            steps {
+                sh 'npm run build'
+            }
+        }
+        stage('Test') {
+            steps {
+                sh 'npm test'
+            }
+            post {
+                always {
+                    junit 'junit.xml'
+                }
+            }
+        }
+    }
 }
