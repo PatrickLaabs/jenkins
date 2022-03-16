@@ -5,7 +5,7 @@ pipeline {
     stage('test') {
         steps {
             echo 'test'
-            sh 'sudo apt-get install go'
+            sh 'su apt-get install go'
         }
     }
   }
