@@ -1,7 +1,7 @@
 pipeline {
   agent any
 
-  stage('Test') {
+  stages ('Test') {
     steps {
         echo 'test'
         sh 'apt-get update'
